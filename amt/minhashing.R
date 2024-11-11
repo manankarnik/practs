@@ -22,3 +22,5 @@ baxter_matches
 
 candidates <- lsh_candidates(buckets)
 candidates
+
+lsh_compare(candidates, corpus, jaccard_similarity)
