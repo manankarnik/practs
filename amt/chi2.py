@@ -11,7 +11,7 @@ print(f"P-value: {p_value}")
 print(f"Degrees of Freedom: {dof}")
 print(f"Expected Frequency: {ef}")
 
-alpha = 0.5
+alpha = 0.05
 critical_value = chi2.ppf(1 - alpha, dof)
 print(f"Critical Value: {critical_value}")
 
