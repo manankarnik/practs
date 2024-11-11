@@ -5,20 +5,22 @@ library("tm")
 library("topicmodels")
 library("stopwords")
 
+setwd("~/college/amt/british-fiction-corpus")
 filenames <- list.files(path="~/college/amt/british-fiction-corpus")
 filenames
+
 filetext <- lapply(filenames, readLines)
 
-mycorpus <- Corpus(VectorSource(filetext))
-mycorpus <- tm_map(mycorpus, tolower)
-mycorpus <- tm_map(mycorpus, removeNumbers)
-mycorpus <- tm_map(mycorpus, removePunctuation)
-mycorpus <- tm_map(mycorpus, removeWords, stopwords())
+corpus <- Corpus(VectorSource(filetext))
+corpus <- tm_map(corpus, tolower)
+corpus <- tm_map(corpus, removePunctuation)
+corpus <- tm_map(corpus, removeNumbers)
+corpus <- tm_map(corpus, removeWords, stopwords())
 
-dtm <- DocumentTermMatrix(mycorpus)
+dtm <- DocumentTermMatrix(corpus)
 dtm
 
-k <- 3
+k <- 5
 lda <- LDA(dtm, k, method="VEM")
 terms(lda, 5)
 topics(lda)
