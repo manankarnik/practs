@@ -13,7 +13,6 @@ def page_rank(am, d=0.85, tol=1e-6):
         if np.linalg.norm(new_pr - pr, 1) < tol:
             return new_pr
         pr = new_pr
-    return pr
 
 
 nodes = ['A', 'B', 'C', 'D']
