@@ -30,20 +30,23 @@ def tournament(pop, fitnesses, num_parents):
 def mutation():
     return random.choice(genes)
 
-def crossover(parents, mutation_rate=0.1):
+def crossover(parents, pop_size, mutation_rate=0.1):
     offsprings = []
-    for i in range(0, len(parents), 2):
-        parent1, parent2 = parents[i], parents[i + 1]
-        child1, child2 = [], []
-        for j in range(len(parent1)):
-            child1.append(parent1[j] if random.uniform(0, 1) < 0.5 else parent2[j])
-            child2.append(parent2[j] if child1[-1] == parent1[j] else parent1[j])
-            if random.uniform(0, 1) < mutation_rate:
-                child1[-1] = mutation()
-            if random.uniform(0, 1) < mutation_rate:
-                child2[-1] = mutation()
-        offsprings.extend([child1, child2])
-    return offsprings
+    while True:
+        for i in range(0, len(parents), 2):
+            p1, p2 = parents[i], parents[i+1]
+            c1, c2 = [], []
+            for j in range(len(p1)):
+                # Crossover: randomly choose gene from either parent
+                gene1 = p1[j] if random.random() < 0.5 else p2[j]
+                gene2 = p2[j] if gene1 == p1[j] else p1[j]
+                
+                # Mutation: occasionally alter the gene
+                c1.append(mutation() if random.random() < mutation_rate else gene1)
+                c2.append(mutation() if random.random() < mutation_rate else gene2)
+            offsprings.extend([c1, c2])
+            if len(offsprings) >= pop_size:
+                return offsprings
 
 genes = list("INDA")
 target = list("INDIA")
