@@ -55,7 +55,7 @@ while True:
     fitnesses, probs = determine_fitness(pop, target)
     parents = roulette(pop, probs, num_parents)
     print("Fittest parents selected with roulette wheel from the population are: ", parents)
-    population = crossover(parents)
+    population = crossover(parents, pop_size)
     print("The new generation after crossover and mutation is:", population)
     iterations += 1
     if target in population:

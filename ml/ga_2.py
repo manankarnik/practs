@@ -64,7 +64,7 @@ while True:
     if use_roulette: parents = roulette(pop, probs, num_parents)
     else: parents = tournament(pop, fitnesses, num_parents)
     print("Fittest parents selected with roulette wheel from the population are: ", parents)
-    new_population = crossover(parents)
+    new_population = crossover(parents, pop_size)
     if sum(fitnesses) > sum(determine_fitness(new_population, target)[0]):
         print("Fitness dropped, switching to tournament selection method")
         use_roulette = False
