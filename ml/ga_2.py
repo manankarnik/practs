@@ -63,7 +63,8 @@ while True:
     print("Fittest parents selected with roulette wheel from the population are: ", parents)
     new_population = crossover(parents)
     if sum(fitnesses) > sum(determine_fitness(new_population, target)[0]):
-       print("Fitness dropped, switching to tournament selection method")
+        print("Fitness dropped, switching to tournament selection method")
+        use_roulette = False
     population = new_population
     print("The new generation after crossover and mutation is:", population)
     iterations += 1
